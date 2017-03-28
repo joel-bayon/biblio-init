@@ -1,0 +1,19 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="entity">
+	<class name="Emprunt" >
+		<id name="id" column="ID_EMPRUNT" >
+			<generator class="native" />
+		</id>
+		<property name="debut" not-null="true"/>
+		<property name="fin" />
+		<many-to-one name="livre" column="LIVRE_ID" not-null="true" fetch="join" />
+		<many-to-one name="adherent" column="ADHERENT_ID" not-null="true" fetch="join"/>
+	</class>
+</hibernate-mapping>
+
+<!-- 
+<!DOCTYPE hibernate-mapping SYSTEM
+    "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+ -->
