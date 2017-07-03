@@ -10,7 +10,7 @@
 
 	<properties>
 		<!-- Spring version -->
-		<spring.version>4.3.2.RELEASE</spring.version>
+		<spring.version>4.3.7.RELEASE</spring.version>
 		<!-- Hibernate version -->
 		<hibernate.version>5.2.1.Final</hibernate.version>
 	</properties>
@@ -21,16 +21,7 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core</artifactId>
-			<version>4.0.0.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-			<version>4.0.0.RELEASE</version>
-		</dependency>
+		
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -75,16 +66,6 @@
 			<artifactId>spring-context</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-
-		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-aspects</artifactId> 
-			<version>${spring.version}</version> </dependency> <dependency> <groupId>org.springframework</groupId> 
-			<artifactId>spring-orm</artifactId> <version>${spring.version}</version> 
-			</dependency> <dependency> <groupId>org.springframework</groupId> <artifactId>spring-tx</artifactId> 
-			<version>${spring.version}</version> </dependency> <dependency> <groupId>org.springframework</groupId> 
-			<artifactId>spring-test</artifactId> <version>${spring.version}</version> 
-			</dependency> <dependency> <groupId>org.springframework</groupId> <artifactId>spring-webmvc</artifactId> 
-			<version>${spring.version}</version> </dependency> -->
-		<!-- http://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>

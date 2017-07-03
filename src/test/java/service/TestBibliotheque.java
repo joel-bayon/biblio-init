@@ -2,9 +2,12 @@ package service;
 
 import org.junit.Assert;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import service.Bibliotheque;
 import service.impl.BibliothequeImpl;
@@ -24,19 +27,34 @@ import entity.Livre;
 
 public class TestBibliotheque {
 
-	static final LivreDao livreDao = new LivreDaoHibernate();
-	static final AdherentDao adherentDao = new AdherentDaoHibernate();
-	static final EmpruntDao empruntDao = new EmpruntDaoHibernate();
-	static final Bibliotheque bibliotheque = new BibliothequeImpl(3,5);
+	
+	static final ConfigurableApplicationContext spring = new ClassPathXmlApplicationContext("spring/spring.bean.xml");
+	LivreDao livreDao;
+	AdherentDao adherentDao;
+	EmpruntDao empruntDao ;
+	Bibliotheque bibliotheque;
 	
 	@BeforeClass
 	public static void clearContext() {
 		util.DataBaseUtil.createSchema();
+		
 	}
+	
+	@AfterClass
+	public static void afterClass() {
+		spring.close();
+		
+	}
+	
+	
 	
 	@Before
 	public void before() {
 		SessionThreadLocal.setTransaction(TransactionState.BEGIN);
+		livreDao = spring.getBean(LivreDao.class);
+		adherentDao = spring.getBean(AdherentDao.class);
+		empruntDao= spring.getBean(EmpruntDao.class );
+		bibliotheque = spring.getBean(Bibliotheque.class );
 	}
 	
 	@After
