@@ -9,7 +9,7 @@
 			org.h2.Driver
 		</property>
 		<property name="hibernate.connection.url">
-			jdbc:h2:tcp://localhost:9092/biblio
+			jdbc:h2:tcp://localhost:9092/~/biblio
 		</property>
 		<property name="hibernate.connection.username">sa</property>
 		<property name="connection.password"></property>
