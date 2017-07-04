@@ -28,10 +28,8 @@ import entity.Livre;
 
 
 public class TestBibliotheque {
-
 	
 	//static final ConfigurableApplicationContext spring = new ClassPathXmlApplicationContext("spring/spring.bean.xml");
-	
 	static final ConfigurableApplicationContext spring = new AnnotationConfigApplicationContext(BiblioConfiguration.class);
 	LivreDao livreDao;
 	AdherentDao adherentDao;
@@ -40,17 +38,13 @@ public class TestBibliotheque {
 	
 	@BeforeClass
 	public static void clearContext() {
-		util.DataBaseUtil.createSchema();
-		
+		util.DataBaseUtil.createSchema();	
 	}
 	
 	@AfterClass
 	public static void afterClass() {
 		spring.close();
-		
 	}
-	
-	
 	
 	@Before
 	public void before() {

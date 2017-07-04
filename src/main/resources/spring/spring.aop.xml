@@ -20,6 +20,6 @@
 		<aop:aspect ref="loggerAspect">
 			<aop:before method="logBefore" pointcut="#{biblioConfig['pointcut']}"/>
 		</aop:aspect>
-	</aop:config>
+	</aop:config> 
 
 </beans>
