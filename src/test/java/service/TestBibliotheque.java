@@ -7,8 +7,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import configuration.BiblioConfiguration;
 import service.Bibliotheque;
 import service.impl.BibliothequeImpl;
 import util.SessionThreadLocal;
@@ -28,7 +30,9 @@ import entity.Livre;
 public class TestBibliotheque {
 
 	
-	static final ConfigurableApplicationContext spring = new ClassPathXmlApplicationContext("spring/spring.bean.xml");
+	//static final ConfigurableApplicationContext spring = new ClassPathXmlApplicationContext("spring/spring.bean.xml");
+	
+	static final ConfigurableApplicationContext spring = new AnnotationConfigApplicationContext(BiblioConfiguration.class);
 	LivreDao livreDao;
 	AdherentDao adherentDao;
 	EmpruntDao empruntDao ;

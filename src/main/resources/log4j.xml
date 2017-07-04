@@ -19,13 +19,25 @@
     	</layout>
 	</appender>
 	
+	<appender name="file2" class="org.apache.log4j.FileAppender">
+		<param name="file" value="khaled.log"/>
+    	<layout class="org.apache.log4j.PatternLayout">
+        	<param name="ConversionPattern" value="%d %-5p [%c{1}] %m%n"/>
+    	</layout>
+	</appender>
+	
 	<logger name="service" additivity="false">
 		<level value="INFO"></level>
 		<appender-ref ref="console"/> </logger>
 		
+		<logger name="util" additivity="false">
+		<level value="TRACE"></level>
+		<appender-ref ref="file2"/> </logger>
+		
+		
 	<logger name="dao" additivity="false">
 		<level value="INFO"></level>
-		<appender-ref ref="console"/> </logger>
+		<appender-ref ref="file"/> </logger>
 
 	<logger name="action" additivity="false">
 		<level value="INFO"></level>
