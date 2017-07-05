@@ -45,7 +45,7 @@ public  class DaoJpaSpring <K, E> implements Dao<K, E> {
 		
 		@Override
 		public void update(E entity) { 
-			EntityManager entityManager = PersistenceContextThreadLocal.getEntityManager();
+			//EntityManager entityManager = PersistenceContextThreadLocal.getEntityManager();
 			entityManager.merge(entity); }
 		
 		@Override
