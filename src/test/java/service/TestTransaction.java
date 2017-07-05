@@ -50,12 +50,12 @@ public class TestTransaction {
 		int idAdherent1 = bibliotheque.ajouterAdherent(new Adherent("Durant2", "Pascal", "0240563412", "pascal.durant@free.fr"));
 		int idAdherent2 = bibliotheque.ajouterAdherent(new Adherent("Martin2", "Jean", "0240992345", "jean.martin@laposte.fr"));
 		
-		int idLivre1 = bibliotheque.ajouterLivre(new Livre("L'étranger",1942, "Albert Camus"));
-		int idLivre2 = bibliotheque.ajouterLivre(new Livre("Tintin au Tibet",1952, "Hergé"));
-		int idLivre3 = bibliotheque.ajouterLivre(new Livre("L'étranger",1942, "Albert Camus"));
+		int idLivre1 = bibliotheque.ajouterLivre(new Livre("L'Ã©tranger",1942, "Albert Camus"));
+		int idLivre2 = bibliotheque.ajouterLivre(new Livre("Tintin au Tibet",1952, "HergÃ©"));
+		int idLivre3 = bibliotheque.ajouterLivre(new Livre("L'Ã©tranger",1942, "Albert Camus"));
 		
-		int idLivre4 = bibliotheque.ajouterLivre(new Livre("Stupeur et tremblements",1999, "Amélie Nothomb"));
-		int idLivre5 = bibliotheque.ajouterLivre(new Livre("Stupeur et tremblements",1999, "Amélie Nothomb"));
+		int idLivre4 = bibliotheque.ajouterLivre(new Livre("Stupeur et tremblements",1999, "AmÃ©lie Nothomb"));
+		int idLivre5 = bibliotheque.ajouterLivre(new Livre("Stupeur et tremblements",1999, "AmÃ©lie Nothomb"));
 		int idLivre6 = bibliotheque.ajouterLivre(new Livre("L'herbe Des Nuits", 2012, "Patrick Modiano"));
 		
 		bibliotheque.emprunterLivre(idLivre1, idAdherent1);
