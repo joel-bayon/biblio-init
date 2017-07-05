@@ -3,6 +3,8 @@ package service;
 import entity.Adherent;
 import entity.Livre;
 
+
+
 public interface Bibliotheque {
 	
 	public int getMaxLivreIdentique();

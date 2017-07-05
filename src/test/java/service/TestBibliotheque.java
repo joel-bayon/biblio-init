@@ -11,6 +11,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import configuration.BiblioConfiguration;
+import configuration.BiblioConfigurationJpa;
 import service.Bibliotheque;
 import service.impl.BibliothequeImpl;
 import util.SessionThreadLocal;
@@ -30,7 +31,7 @@ import entity.Livre;
 public class TestBibliotheque {
 	
 	//static final ConfigurableApplicationContext spring = new ClassPathXmlApplicationContext("spring/spring.bean.xml");
-	static final ConfigurableApplicationContext spring = new AnnotationConfigApplicationContext(BiblioConfiguration.class);
+	static final ConfigurableApplicationContext spring = new AnnotationConfigApplicationContext(BiblioConfigurationJpa.class);
 	LivreDao livreDao;
 	AdherentDao adherentDao;
 	EmpruntDao empruntDao ;
@@ -48,16 +49,10 @@ public class TestBibliotheque {
 	
 	@Before
 	public void before() {
-		SessionThreadLocal.setTransaction(TransactionState.BEGIN);
 		livreDao = spring.getBean(LivreDao.class);
 		adherentDao = spring.getBean(AdherentDao.class);
 		empruntDao= spring.getBean(EmpruntDao.class );
 		bibliotheque = spring.getBean(Bibliotheque.class );
-	}
-	
-	@After
-	public void after() {
-		SessionThreadLocal.setTransaction(TransactionState.COMMIT);
 	}
 	
 	@Test (expected=BusinessException.class)

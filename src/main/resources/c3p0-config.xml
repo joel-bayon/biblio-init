@@ -19,6 +19,6 @@
      
     <property name="maxIdleTime">1800</property>
     <property name="maxIdleTimeExcessConnections">300</property>
-	-->
+	
   </default-config>
 </c3p0-config>

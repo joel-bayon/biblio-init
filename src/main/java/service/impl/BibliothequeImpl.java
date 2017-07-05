@@ -6,6 +6,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import service.Bibliotheque;
 import dao.AdherentDao;
@@ -20,6 +22,7 @@ import entity.Emprunt;
 import entity.Livre;
 
 @Service
+@Transactional
 public class BibliothequeImpl implements Bibliotheque {
 	final int maxLivreIdentique;
 	final int maxEmpruntAdherent;
@@ -102,6 +105,7 @@ public class BibliothequeImpl implements Bibliotheque {
 	}
 	
 	@Override
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	public void restituerLivre(int idLivre, int idAdherent) {
 		// RG : un emprunt doit exist� avec le couple idLivre/idAdherent
 		Emprunt emprunt = empruntDao.getEmpruntEnCoursByLivre(idLivre);
