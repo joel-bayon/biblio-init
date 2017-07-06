@@ -19,7 +19,7 @@ import jpa.repository.EmpruntRepository;
 import jpa.repository.LivreRepository;
 import service.Bibliotheque;
 
-@Service
+//@Service
 @Transactional
 @Primary
 public class BibliothequeSpringData implements Bibliotheque {

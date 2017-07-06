@@ -56,7 +56,7 @@ public class TestBibliotheque {
 		livreDao = spring.getBean(LivreRepository.class);
 		adherentDao = spring.getBean(AdherentRepository.class);
 		empruntDao= spring.getBean(jpa.repository.EmpruntRepository.class );
-		bibliotheque = spring.getBean(BibliothequeSpringData.class );
+		bibliotheque = spring.getBean(Bibliotheque.class );
 	}
 	
 	@Test (expected=BusinessException.class)
