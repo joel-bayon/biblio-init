@@ -14,6 +14,7 @@ import configuration.BiblioConfiguration;
 import configuration.BiblioConfigurationJpa;
 import service.Bibliotheque;
 import service.impl.BibliothequeImpl;
+import service.impl.BibliothequeSpringData;
 import util.SessionThreadLocal;
 import util.SessionThreadLocal.TransactionState;
 import dao.AdherentDao;
@@ -26,15 +27,18 @@ import entity.Adherent;
 import entity.BusinessException;
 import entity.Emprunt;
 import entity.Livre;
+import jpa.repository.AdherentRepository;
+import jpa.repository.LivreRepository;
+import jpa.repository.EmpruntRepository;
 
 
 public class TestBibliotheque {
 	
 	//static final ConfigurableApplicationContext spring = new ClassPathXmlApplicationContext("spring/spring.bean.xml");
 	static final ConfigurableApplicationContext spring = new AnnotationConfigApplicationContext(BiblioConfigurationJpa.class);
-	LivreDao livreDao;
-	AdherentDao adherentDao;
-	EmpruntDao empruntDao ;
+	LivreRepository livreDao;
+	AdherentRepository adherentDao;
+	EmpruntRepository empruntDao ;
 	Bibliotheque bibliotheque;
 	
 	@BeforeClass
@@ -49,10 +53,10 @@ public class TestBibliotheque {
 	
 	@Before
 	public void before() {
-		livreDao = spring.getBean(LivreDao.class);
-		adherentDao = spring.getBean(AdherentDao.class);
-		empruntDao= spring.getBean(EmpruntDao.class );
-		bibliotheque = spring.getBean(Bibliotheque.class );
+		livreDao = spring.getBean(LivreRepository.class);
+		adherentDao = spring.getBean(AdherentRepository.class);
+		empruntDao= spring.getBean(jpa.repository.EmpruntRepository.class );
+		bibliotheque = spring.getBean(BibliothequeSpringData.class );
 	}
 	
 	@Test (expected=BusinessException.class)
@@ -71,9 +75,9 @@ public class TestBibliotheque {
 			bibliotheque.ajouterLivre(new Livre("L'étranger",1942, "Albert Camus"));
 		}
 		catch (BusinessException e) {
-			Assert.assertEquals(bibliotheque.getMaxLivreIdentique(), livreDao.getCount(new Livre("L'étranger",1942, "Albert Camus")));
-			livreDao.removeAll(livreDao.loadAll());
-			Assert.assertEquals(0, livreDao.loadAll().size());
+			Assert.assertEquals((Long.valueOf(bibliotheque.getMaxLivreIdentique())), livreDao.countByTitreAndAuteur("L'étranger","Albert Camus"));
+			livreDao.delete(livreDao.findAll());
+			Assert.assertEquals(0, livreDao.findAll().size());
 			throw e;
 		}
 	}
@@ -87,9 +91,9 @@ public class TestBibliotheque {
 			bibliotheque.ajouterAdherent(new Adherent("Martin", "Jean", "0240992355", "jean.martin@laposte.fr"));
 		}
 		catch (BusinessException e) {
-			Assert.assertEquals(2, adherentDao.loadAll().size());
-			adherentDao.removeAll(adherentDao.loadAll());
-			Assert.assertEquals(0, adherentDao.loadAll().size());
+			Assert.assertEquals(2, adherentDao.findAll().size());
+			adherentDao.delete(adherentDao.findAll());
+			Assert.assertEquals(0, adherentDao.findAll().size());
 			throw e;
 		}
 	}
@@ -107,7 +111,7 @@ public class TestBibliotheque {
 			bibliotheque.retirerLivre(l1.getId());
 			bibliotheque.retirerLivre(l2.getId());
 			bibliotheque.retirerLivre(l3.getId());
-			Assert.assertEquals(0,  livreDao.getCount(new Livre("Stupeur et tremblements",1999, "Amélie Nothomb")));
+			Assert.assertEquals(Long.valueOf(0l),  livreDao.countByTitreAndAuteur("Stupeur et tremblements","Amélie Nothomb"));
 		
 		}
 		catch(Exception e) {
@@ -118,7 +122,7 @@ public class TestBibliotheque {
 	
 	public void retirerAdherent() {
 		try {
-			int nbAdherent = adherentDao.loadAll().size();
+			int nbAdherent = adherentDao.findAll().size();
 	
 			int id1 = bibliotheque.ajouterAdherent(new Adherent("Durant2", "Pascal", "0240563412", "pascal.durant@free.fr"));
 			int id2 = bibliotheque.ajouterAdherent(new Adherent("Martin2", "Jean", "0240992345", "jean.martin@laposte.fr"));
@@ -127,7 +131,7 @@ public class TestBibliotheque {
 			
 			bibliotheque.retirerAdherent(id1); 
 			bibliotheque.retirerAdherent(id1);
-			Assert.assertEquals(nbAdherent,adherentDao.loadAll().size());
+			Assert.assertEquals(nbAdherent,adherentDao.findAll().size());
 		
 		}
 		catch(Exception e) {
@@ -213,8 +217,8 @@ public class TestBibliotheque {
 		
 		bibliotheque.retirerAdherent(idAdherent1);
 		
-		empruntDao.removeAll(empruntDao.loadAll());
-		adherentDao.removeAll(adherentDao.loadAll());
-		livreDao.removeAll(livreDao.loadAll());
+		empruntDao.delete(empruntDao.findAll());
+		adherentDao.delete(adherentDao.findAll());
+		livreDao.delete(livreDao.findAll());
 	}
 }
