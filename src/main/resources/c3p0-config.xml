@@ -3,7 +3,7 @@
   <default-config>
     <!-- Config H2 en réseau  -->
     <property name="driverClass">org.h2.Driver</property>
-    <property name="jdbcUrl">jdbc:h2:tcp://localhost:9092/biblio</property>
+    <property name="jdbcUrl">jdbc:h2:tcp://localhost:9092/~/biblio</property>
     <property name="user">sa</property>
     <property name="password"></property>
     
