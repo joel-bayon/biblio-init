@@ -21,8 +21,8 @@ import entity.BusinessException;
 import entity.Emprunt;
 import entity.Livre;
 
-@Service
-@Transactional
+//@Service
+//@Transactional
 public class BibliothequeImpl implements Bibliotheque {
 	final int maxLivreIdentique;
 	final int maxEmpruntAdherent;

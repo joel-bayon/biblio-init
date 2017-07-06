@@ -4,10 +4,8 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import entity.Adherent;
@@ -19,9 +17,8 @@ import jpa.repository.EmpruntRepository;
 import jpa.repository.LivreRepository;
 import service.Bibliotheque;
 
-//@Service
+@Service
 @Transactional
-@Primary
 public class BibliothequeSpringData implements Bibliotheque {
 	final int maxLivreIdentique;
 	final int maxEmpruntAdherent;
@@ -51,12 +48,12 @@ public class BibliothequeSpringData implements Bibliotheque {
 	@Override
 	public int ajouterLivre(Livre livre)  {
 		//RG : maxLivreIdentique ?
-		//if(livreDao.countByTitreAndAuteur(livre.getTitre(), livre.getAuteur()) == maxLivreIdentique ) 
-		Livre example = new Livre(livre.getTitre(),livre.getParution(), livre.getAuteur());
-		if(livreDao.count(Example.of(example)) == maxLivreIdentique ) 
+		if(livreDao.countByTitreAndAuteur(livre.getTitre(), livre.getAuteur()) == maxLivreIdentique ) 
+		//Livre example = new Livre(livre.getTitre(),livre.getParution(), livre.getAuteur());
+		//if(livreDao.count(Example.of(example)) == maxLivreIdentique ) 
 			throw new BusinessException("BibliothequeImpl.ajouterLivre", null);
-		livreDao.save(livre);
-		return livre.getId();
+		return livreDao.save(livre).getId();
+		//return livre.getId();
 	}
 
 
@@ -66,7 +63,7 @@ public class BibliothequeSpringData implements Bibliotheque {
 		//RG : livre vacant ?
 		if(empruntDao.getEmpruntEnCoursByLivre(idLivre) != null) 
 			throw new BusinessException("BibliothequeImpl.retirerLivre", null); 
-		//d�truire d'abord les anciens emprunts puis le live ....
+		//détruire d'abord les anciens emprunts puis le live ....
 		empruntDao.delete(empruntDao.getAllByLivre(idLivre));
 		livreDao.delete(idLivre);
 	}
@@ -74,11 +71,11 @@ public class BibliothequeSpringData implements Bibliotheque {
 	@Override
 	public int ajouterAdherent(Adherent adherent) {
 		
-		//RG est d�j� Present ?
+		//RG est déjé Present ?
 		if(adherentDao.isPresent(adherent))
 			throw new BusinessException("BibliothequeImpl.ajouterAdherent", null); 
-		adherentDao.save(adherent);
-		return adherent.getId();
+		return adherentDao.save(adherent).getId();
+		//return adherent.getId();
 	}
 
 
@@ -88,7 +85,7 @@ public class BibliothequeSpringData implements Bibliotheque {
 		//RG : adherent vacant ?
 		if(empruntDao.getEmpruntsEnCoursByAdherent(idAdherent).size() > 0)
 			throw new BusinessException("BibliothequeImpl.retirerAdherent", null); 
-		//d�truire d'abord les anciens emprunts puis l'adh�rent ....
+		//détruire d'abord les anciens emprunts puis l'adhérent ....
 		empruntDao.delete(empruntDao.getAllByAdherent(idAdherent));
 		adherentDao.delete(idAdherent);	
 	}
@@ -98,7 +95,7 @@ public class BibliothequeSpringData implements Bibliotheque {
 		//RG : maxEmpruntAdherent ?
 		if( empruntDao.getAllByAdherent(idAdherent).size() == maxEmpruntAdherent)
 			throw new BusinessException("BibliothequeImpl.emprunterLivre", null); 
-		//RG : livre d�j� emprunt� !
+		//RG : livre déjé emprunté !
 		if(empruntDao.getEmpruntEnCoursByLivre(idLivre) != null)
 			throw new BusinessException("BibliothequeImpl.emprunterLivre", null); 
 
@@ -106,9 +103,8 @@ public class BibliothequeSpringData implements Bibliotheque {
 	}
 	
 	@Override
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	public void restituerLivre(int idLivre, int idAdherent) {
-		// RG : un emprunt doit exist� avec le couple idLivre/idAdherent
+		// RG : un emprunt doit existé avec le couple idLivre/idAdherent
 		Emprunt emprunt = empruntDao.getEmpruntEnCoursByLivre(idLivre);
 		if(emprunt == null || emprunt.getAdherent().getId() != idAdherent)
 			throw new BusinessException("BibliothequeImpl.restituerLivre", null);  /// A finir ...

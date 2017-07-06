@@ -1,35 +1,21 @@
 package service;
 
-import org.junit.Assert;
-import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import configuration.BiblioConfiguration;
 import configuration.BiblioConfigurationJpa;
-import service.Bibliotheque;
-import service.impl.BibliothequeImpl;
-import service.impl.BibliothequeSpringData;
-import util.SessionThreadLocal;
-import util.SessionThreadLocal.TransactionState;
-import dao.AdherentDao;
-import dao.EmpruntDao;
-import dao.LivreDao;
-import dao.hibernate.AdherentDaoHibernate;
-import dao.hibernate.EmpruntDaoHibernate;
-import dao.hibernate.LivreDaoHibernate;
 import entity.Adherent;
 import entity.BusinessException;
 import entity.Emprunt;
 import entity.Livre;
 import jpa.repository.AdherentRepository;
-import jpa.repository.LivreRepository;
 import jpa.repository.EmpruntRepository;
+import jpa.repository.LivreRepository;
 
 
 public class TestBibliotheque {
@@ -151,9 +137,9 @@ public class TestBibliotheque {
 		Livre l1 = new Livre("Stupeur et tremblements",1999, "Amélie Nothomb");
 		Livre l2 = new Livre("Stupeur et tremblements",1999, "Amélie Nothomb");
 		Livre l3 = new Livre("L'herbe Des Nuits", 2012, "Patrick Modiano");
-		livreDao.save(l1);
-		livreDao.save(l2);
-		livreDao.save(l3);
+		l1 = livreDao.save(l1);
+		l2 = livreDao.save(l2);
+		l3 = livreDao.save(l3);
 		livreDao.save(new Livre("La Fille de papier",  2011,  "Guillaume Musso"));
 		
 		
