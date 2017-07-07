@@ -26,16 +26,16 @@
     	</layout>
 	</appender>
 	
-	<logger name="service" additivity="false">
+	<logger name="biblio.service" additivity="false">
 		<level value="INFO"></level>
 		<appender-ref ref="console"/> </logger>
 		
-		<logger name="util" additivity="false">
+		<logger name="biblio.util" additivity="false">
 		<level value="TRACE"></level>
 		<appender-ref ref="file2"/> </logger>
 		
 		
-	<logger name="dao" additivity="false">
+	<logger name="biblio.dao" additivity="false">
 		<level value="INFO"></level>
 		<appender-ref ref="file"/> </logger>
 

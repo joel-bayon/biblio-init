@@ -1,6 +1,6 @@
-<!-- Hibernate file-based configuration document.
+<!-- Hibernate file-babiblio.configurationtion document.
 
-<!DOCTYPE hibernate-configuration PUBLIC
+<!DOCTYPE hibernbiblio.configurationtion PUBLIC
 	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
 	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
@@ -34,10 +34,10 @@ in JNDI.
 <!ATTLIST collection-cache usage (read-only|read-write|nonstrict-read-write|transactional) #REQUIRED>
 
 <!ELEMENT event (listener*)>
-<!ATTLIST event type (auto-flush|merge|create|create-onflush|delete|dirty-check|evict|flush|flush-entity|load|load-collection|lock|refresh|replicate|save-update|save|update|pre-load|pre-update|pre-insert|pre-delete|pre-collection-recreate|pre-collection-remove|pre-collection-update|post-load|post-update|post-insert|post-delete|post-collection-recreate|post-collection-remove|post-collection-update|post-commit-update|post-commit-insert|post-commit-delete) #REQUIRED>
+<!ATTLIST event type (auto-flush|merge|create|create-onflush|delete|dirty-check|evict|flush|flush-biblio.entity|load|load-collection|lock|refresh|replicate|save-update|save|update|pre-load|pre-update|pre-insert|pre-delete|pre-collection-recreate|pre-collection-remove|pre-collection-update|post-load|post-update|post-insert|post-delete|post-collection-recreate|post-collection-remove|post-collection-update|post-commit-update|post-commit-insert|post-commit-delete) #REQUIRED>
 
 <!ELEMENT listener EMPTY>
-<!ATTLIST listener type (auto-flush|merge|create|create-onflush|delete|dirty-check|evict|flush|flush-entity|load|load-collection|lock|refresh|replicate|save-update|save|update|pre-load|pre-update|pre-insert|pre-delete|pre-collection-recreate|pre-collection-remove|pre-collection-update|post-load|post-update|post-insert|post-delete|post-collection-recreate|post-collection-remove|post-collection-update|post-commit-update|post-commit-insert|post-commit-delete) #IMPLIED>
+<!ATTLIST listener type (auto-flush|merge|create|create-onflush|delete|dirty-check|evict|flush|flush-biblio.entity|load|load-collection|lock|refresh|replicate|save-update|save|update|pre-load|pre-update|pre-insert|pre-delete|pre-collection-recreate|pre-collection-remove|pre-collection-update|post-load|post-update|post-insert|post-delete|post-collection-recreate|post-collection-remove|post-collection-update|post-commit-update|post-commit-insert|post-commit-delete) #IMPLIED>
 <!ATTLIST listener class CDATA #REQUIRED>
 
 <!ELEMENT session-factory (property*, mapping*, (class-cache|collection-cache)*, event*, listener*)>
@@ -48,5 +48,5 @@ in JNDI.
 
 <!ELEMENT grant EMPTY>
 <!ATTLIST grant role CDATA #REQUIRED>
-<!ATTLIST grant entity-name CDATA #REQUIRED>
+<!ATTLIST grant biblio.entity-name CDATA #REQUIRED>
 <!ATTLIST grant actions CDATA #REQUIRED>
